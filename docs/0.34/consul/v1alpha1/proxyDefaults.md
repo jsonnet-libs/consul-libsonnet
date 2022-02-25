@@ -33,6 +33,7 @@ permalink: /0.34/consul/v1alpha1/proxyDefaults/
   * [`fn withUid(uid)`](#fn-metadatawithuid)
 * [`obj spec`](#obj-spec)
   * [`fn withConfig(config)`](#fn-specwithconfig)
+  * [`fn withConfigMixin(config)`](#fn-specwithconfigmixin)
   * [`fn withMode(mode)`](#fn-specwithmode)
   * [`obj spec.expose`](#obj-specexpose)
     * [`fn withChecks(checks)`](#fn-specexposewithchecks)
@@ -247,6 +248,16 @@ withConfig(config)
 ```
 
 "Config is an arbitrary map of configuration values used by Connect proxies. Any values that your proxy allows can be configured globally here. Supports JSON config values. See https://www.consul.io/docs/connect/proxies/envoy#configuration-formatting"
+
+### fn spec.withConfigMixin
+
+```ts
+withConfigMixin(config)
+```
+
+"Config is an arbitrary map of configuration values used by Connect proxies. Any values that your proxy allows can be configured globally here. Supports JSON config values. See https://www.consul.io/docs/connect/proxies/envoy#configuration-formatting"
+
+**Note:** This function appends passed data to existing values
 
 ### fn spec.withMode
 
