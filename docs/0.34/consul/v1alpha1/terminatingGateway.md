@@ -22,8 +22,6 @@ permalink: /0.34/consul/v1alpha1/terminatingGateway/
   * [`fn withGeneration(generation)`](#fn-metadatawithgeneration)
   * [`fn withLabels(labels)`](#fn-metadatawithlabels)
   * [`fn withLabelsMixin(labels)`](#fn-metadatawithlabelsmixin)
-  * [`fn withManagedFields(managedFields)`](#fn-metadatawithmanagedfields)
-  * [`fn withManagedFieldsMixin(managedFields)`](#fn-metadatawithmanagedfieldsmixin)
   * [`fn withName(name)`](#fn-metadatawithname)
   * [`fn withNamespace(namespace)`](#fn-metadatawithnamespace)
   * [`fn withOwnerReferences(ownerReferences)`](#fn-metadatawithownerreferences)
@@ -34,6 +32,13 @@ permalink: /0.34/consul/v1alpha1/terminatingGateway/
 * [`obj spec`](#obj-spec)
   * [`fn withServices(services)`](#fn-specwithservices)
   * [`fn withServicesMixin(services)`](#fn-specwithservicesmixin)
+  * [`obj spec.services`](#obj-specservices)
+    * [`fn withCaFile(caFile)`](#fn-specserviceswithcafile)
+    * [`fn withCertFile(certFile)`](#fn-specserviceswithcertfile)
+    * [`fn withKeyFile(keyFile)`](#fn-specserviceswithkeyfile)
+    * [`fn withName(name)`](#fn-specserviceswithname)
+    * [`fn withNamespace(namespace)`](#fn-specserviceswithnamespace)
+    * [`fn withSni(sni)`](#fn-specserviceswithsni)
 
 ## Fields
 
@@ -151,24 +156,6 @@ withLabelsMixin(labels)
 
 **Note:** This function appends passed data to existing values
 
-### fn metadata.withManagedFields
-
-```ts
-withManagedFields(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-### fn metadata.withManagedFieldsMixin
-
-```ts
-withManagedFieldsMixin(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-**Note:** This function appends passed data to existing values
-
 ### fn metadata.withName
 
 ```ts
@@ -248,3 +235,55 @@ withServicesMixin(services)
 "Services is a list of service names represented by the terminating gateway."
 
 **Note:** This function appends passed data to existing values
+
+## obj spec.services
+
+"Services is a list of service names represented by the terminating gateway."
+
+### fn spec.services.withCaFile
+
+```ts
+withCaFile(caFile)
+```
+
+"CAFile is the optional path to a CA certificate to use for TLS connections from the gateway to the linked service."
+
+### fn spec.services.withCertFile
+
+```ts
+withCertFile(certFile)
+```
+
+"CertFile is the optional path to a client certificate to use for TLS connections from the gateway to the linked service."
+
+### fn spec.services.withKeyFile
+
+```ts
+withKeyFile(keyFile)
+```
+
+"KeyFile is the optional path to a private key to use for TLS connections from the gateway to the linked service."
+
+### fn spec.services.withName
+
+```ts
+withName(name)
+```
+
+"Name is the name of the service, as defined in Consul's catalog."
+
+### fn spec.services.withNamespace
+
+```ts
+withNamespace(namespace)
+```
+
+"The namespace the service is registered in."
+
+### fn spec.services.withSni
+
+```ts
+withSni(sni)
+```
+
+"SNI is the optional name to specify during the TLS handshake with a linked service."

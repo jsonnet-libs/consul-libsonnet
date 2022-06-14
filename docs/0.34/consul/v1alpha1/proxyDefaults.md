@@ -22,8 +22,6 @@ permalink: /0.34/consul/v1alpha1/proxyDefaults/
   * [`fn withGeneration(generation)`](#fn-metadatawithgeneration)
   * [`fn withLabels(labels)`](#fn-metadatawithlabels)
   * [`fn withLabelsMixin(labels)`](#fn-metadatawithlabelsmixin)
-  * [`fn withManagedFields(managedFields)`](#fn-metadatawithmanagedfields)
-  * [`fn withManagedFieldsMixin(managedFields)`](#fn-metadatawithmanagedfieldsmixin)
   * [`fn withName(name)`](#fn-metadatawithname)
   * [`fn withNamespace(namespace)`](#fn-metadatawithnamespace)
   * [`fn withOwnerReferences(ownerReferences)`](#fn-metadatawithownerreferences)
@@ -39,6 +37,11 @@ permalink: /0.34/consul/v1alpha1/proxyDefaults/
     * [`fn withChecks(checks)`](#fn-specexposewithchecks)
     * [`fn withPaths(paths)`](#fn-specexposewithpaths)
     * [`fn withPathsMixin(paths)`](#fn-specexposewithpathsmixin)
+    * [`obj spec.expose.paths`](#obj-specexposepaths)
+      * [`fn withListenerPort(listenerPort)`](#fn-specexposepathswithlistenerport)
+      * [`fn withLocalPathPort(localPathPort)`](#fn-specexposepathswithlocalpathport)
+      * [`fn withPath(path)`](#fn-specexposepathswithpath)
+      * [`fn withProtocol(protocol)`](#fn-specexposepathswithprotocol)
   * [`obj spec.meshGateway`](#obj-specmeshgateway)
     * [`fn withMode(mode)`](#fn-specmeshgatewaywithmode)
   * [`obj spec.transparentProxy`](#obj-spectransparentproxy)
@@ -161,24 +164,6 @@ withLabelsMixin(labels)
 
 **Note:** This function appends passed data to existing values
 
-### fn metadata.withManagedFields
-
-```ts
-withManagedFields(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-### fn metadata.withManagedFieldsMixin
-
-```ts
-withManagedFieldsMixin(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-**Note:** This function appends passed data to existing values
-
 ### fn metadata.withName
 
 ```ts
@@ -296,6 +281,42 @@ withPathsMixin(paths)
 "Paths is the list of paths exposed through the proxy."
 
 **Note:** This function appends passed data to existing values
+
+## obj spec.expose.paths
+
+"Paths is the list of paths exposed through the proxy."
+
+### fn spec.expose.paths.withListenerPort
+
+```ts
+withListenerPort(listenerPort)
+```
+
+"ListenerPort defines the port of the proxy's listener for exposed paths."
+
+### fn spec.expose.paths.withLocalPathPort
+
+```ts
+withLocalPathPort(localPathPort)
+```
+
+"LocalPathPort is the port that the service is listening on for the given path."
+
+### fn spec.expose.paths.withPath
+
+```ts
+withPath(path)
+```
+
+"Path is the path to expose through the proxy, ie. \"/metrics\"."
+
+### fn spec.expose.paths.withProtocol
+
+```ts
+withProtocol(protocol)
+```
+
+"Protocol describes the upstream's service protocol. Valid values are \"http\" and \"http2\", defaults to \"http\"."
 
 ## obj spec.meshGateway
 

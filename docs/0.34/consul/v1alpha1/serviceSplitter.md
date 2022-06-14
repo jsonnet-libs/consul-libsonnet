@@ -22,8 +22,6 @@ permalink: /0.34/consul/v1alpha1/serviceSplitter/
   * [`fn withGeneration(generation)`](#fn-metadatawithgeneration)
   * [`fn withLabels(labels)`](#fn-metadatawithlabels)
   * [`fn withLabelsMixin(labels)`](#fn-metadatawithlabelsmixin)
-  * [`fn withManagedFields(managedFields)`](#fn-metadatawithmanagedfields)
-  * [`fn withManagedFieldsMixin(managedFields)`](#fn-metadatawithmanagedfieldsmixin)
   * [`fn withName(name)`](#fn-metadatawithname)
   * [`fn withNamespace(namespace)`](#fn-metadatawithnamespace)
   * [`fn withOwnerReferences(ownerReferences)`](#fn-metadatawithownerreferences)
@@ -34,6 +32,11 @@ permalink: /0.34/consul/v1alpha1/serviceSplitter/
 * [`obj spec`](#obj-spec)
   * [`fn withSplits(splits)`](#fn-specwithsplits)
   * [`fn withSplitsMixin(splits)`](#fn-specwithsplitsmixin)
+  * [`obj spec.splits`](#obj-specsplits)
+    * [`fn withNamespace(namespace)`](#fn-specsplitswithnamespace)
+    * [`fn withService(service)`](#fn-specsplitswithservice)
+    * [`fn withServiceSubset(serviceSubset)`](#fn-specsplitswithservicesubset)
+    * [`fn withWeight(weight)`](#fn-specsplitswithweight)
 
 ## Fields
 
@@ -151,24 +154,6 @@ withLabelsMixin(labels)
 
 **Note:** This function appends passed data to existing values
 
-### fn metadata.withManagedFields
-
-```ts
-withManagedFields(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-### fn metadata.withManagedFieldsMixin
-
-```ts
-withManagedFieldsMixin(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-**Note:** This function appends passed data to existing values
-
 ### fn metadata.withName
 
 ```ts
@@ -248,3 +233,39 @@ withSplitsMixin(splits)
 "Splits defines how much traffic to send to which set of service instances during a traffic split. The sum of weights across all splits must add up to 100."
 
 **Note:** This function appends passed data to existing values
+
+## obj spec.splits
+
+"Splits defines how much traffic to send to which set of service instances during a traffic split. The sum of weights across all splits must add up to 100."
+
+### fn spec.splits.withNamespace
+
+```ts
+withNamespace(namespace)
+```
+
+"The namespace to resolve the service from instead of the current namespace. If empty the current namespace is assumed."
+
+### fn spec.splits.withService
+
+```ts
+withService(service)
+```
+
+"Service is the service to resolve instead of the default."
+
+### fn spec.splits.withServiceSubset
+
+```ts
+withServiceSubset(serviceSubset)
+```
+
+"ServiceSubset is a named subset of the given service to resolve instead of one defined as that service's DefaultSubset. If empty the default subset is used."
+
+### fn spec.splits.withWeight
+
+```ts
+withWeight(weight)
+```
+
+"Weight is a value between 0 and 100 reflecting what portion of traffic should be directed to this split. The smallest representable weight is 1/10000 or .01%."

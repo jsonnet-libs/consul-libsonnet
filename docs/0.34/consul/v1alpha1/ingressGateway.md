@@ -22,8 +22,6 @@ permalink: /0.34/consul/v1alpha1/ingressGateway/
   * [`fn withGeneration(generation)`](#fn-metadatawithgeneration)
   * [`fn withLabels(labels)`](#fn-metadatawithlabels)
   * [`fn withLabelsMixin(labels)`](#fn-metadatawithlabelsmixin)
-  * [`fn withManagedFields(managedFields)`](#fn-metadatawithmanagedfields)
-  * [`fn withManagedFieldsMixin(managedFields)`](#fn-metadatawithmanagedfieldsmixin)
   * [`fn withName(name)`](#fn-metadatawithname)
   * [`fn withNamespace(namespace)`](#fn-metadatawithnamespace)
   * [`fn withOwnerReferences(ownerReferences)`](#fn-metadatawithownerreferences)
@@ -34,6 +32,16 @@ permalink: /0.34/consul/v1alpha1/ingressGateway/
 * [`obj spec`](#obj-spec)
   * [`fn withListeners(listeners)`](#fn-specwithlisteners)
   * [`fn withListenersMixin(listeners)`](#fn-specwithlistenersmixin)
+  * [`obj spec.listeners`](#obj-speclisteners)
+    * [`fn withPort(port)`](#fn-speclistenerswithport)
+    * [`fn withProtocol(protocol)`](#fn-speclistenerswithprotocol)
+    * [`fn withServices(services)`](#fn-speclistenerswithservices)
+    * [`fn withServicesMixin(services)`](#fn-speclistenerswithservicesmixin)
+    * [`obj spec.listeners.services`](#obj-speclistenersservices)
+      * [`fn withHosts(hosts)`](#fn-speclistenersserviceswithhosts)
+      * [`fn withHostsMixin(hosts)`](#fn-speclistenersserviceswithhostsmixin)
+      * [`fn withName(name)`](#fn-speclistenersserviceswithname)
+      * [`fn withNamespace(namespace)`](#fn-speclistenersserviceswithnamespace)
   * [`obj spec.tls`](#obj-spectls)
     * [`fn withEnabled(enabled)`](#fn-spectlswithenabled)
 
@@ -153,24 +161,6 @@ withLabelsMixin(labels)
 
 **Note:** This function appends passed data to existing values
 
-### fn metadata.withManagedFields
-
-```ts
-withManagedFields(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-### fn metadata.withManagedFieldsMixin
-
-```ts
-withManagedFieldsMixin(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-**Note:** This function appends passed data to existing values
-
 ### fn metadata.withName
 
 ```ts
@@ -250,6 +240,82 @@ withListenersMixin(listeners)
 "Listeners declares what ports the ingress gateway should listen on, and what services to associated to those ports."
 
 **Note:** This function appends passed data to existing values
+
+## obj spec.listeners
+
+"Listeners declares what ports the ingress gateway should listen on, and what services to associated to those ports."
+
+### fn spec.listeners.withPort
+
+```ts
+withPort(port)
+```
+
+"Port declares the port on which the ingress gateway should listen for traffic."
+
+### fn spec.listeners.withProtocol
+
+```ts
+withProtocol(protocol)
+```
+
+"Protocol declares what type of traffic this listener is expected to receive. Depending on the protocol, a listener might support multiplexing services over a single port, or additional discovery chain features. The current supported values are: (tcp | http | http2 | grpc)."
+
+### fn spec.listeners.withServices
+
+```ts
+withServices(services)
+```
+
+"Services declares the set of services to which the listener forwards traffic. \n For \"tcp\" protocol listeners, only a single service is allowed. For \"http\" listeners, multiple services can be declared."
+
+### fn spec.listeners.withServicesMixin
+
+```ts
+withServicesMixin(services)
+```
+
+"Services declares the set of services to which the listener forwards traffic. \n For \"tcp\" protocol listeners, only a single service is allowed. For \"http\" listeners, multiple services can be declared."
+
+**Note:** This function appends passed data to existing values
+
+## obj spec.listeners.services
+
+"Services declares the set of services to which the listener forwards traffic. \n For \"tcp\" protocol listeners, only a single service is allowed. For \"http\" listeners, multiple services can be declared."
+
+### fn spec.listeners.services.withHosts
+
+```ts
+withHosts(hosts)
+```
+
+"Hosts is a list of hostnames which should be associated to this service on the defined listener. Only allowed on layer 7 protocols, this will be used to route traffic to the service by matching the Host header of the HTTP request. \n If a host is provided for a service that also has a wildcard specifier defined, the host will override the wildcard-specifier-provided \"<service-name>.*\" domain for that listener. \n This cannot be specified when using the wildcard specifier, \"*\", or when using a \"tcp\" listener."
+
+### fn spec.listeners.services.withHostsMixin
+
+```ts
+withHostsMixin(hosts)
+```
+
+"Hosts is a list of hostnames which should be associated to this service on the defined listener. Only allowed on layer 7 protocols, this will be used to route traffic to the service by matching the Host header of the HTTP request. \n If a host is provided for a service that also has a wildcard specifier defined, the host will override the wildcard-specifier-provided \"<service-name>.*\" domain for that listener. \n This cannot be specified when using the wildcard specifier, \"*\", or when using a \"tcp\" listener."
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.listeners.services.withName
+
+```ts
+withName(name)
+```
+
+"Name declares the service to which traffic should be forwarded. \n This can either be a specific service, or the wildcard specifier, \"*\". If the wildcard specifier is provided, the listener must be of \"http\" protocol and means that the listener will forward traffic to all services. \n A name can be specified on multiple listeners, and will be exposed on both of the listeners."
+
+### fn spec.listeners.services.withNamespace
+
+```ts
+withNamespace(namespace)
+```
+
+"Namespace is the namespace where the service is located. Namespacing is a Consul Enterprise feature."
 
 ## obj spec.tls
 

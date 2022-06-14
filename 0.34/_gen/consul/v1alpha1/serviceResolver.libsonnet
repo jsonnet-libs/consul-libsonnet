@@ -27,10 +27,6 @@
     withLabels(labels): { metadata+: { labels: labels } },
     '#withLabelsMixin':: d.fn(help='"Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels"\n\n**Note:** This function appends passed data to existing values', args=[d.arg(name='labels', type=d.T.object)]),
     withLabelsMixin(labels): { metadata+: { labels+: labels } },
-    '#withManagedFields':: d.fn(help="\"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \\\"ci-cd\\\". The set of fields is always in the version that the workflow used when modifying the object.\"", args=[d.arg(name='managedFields', type=d.T.array)]),
-    withManagedFields(managedFields): { metadata+: { managedFields: if std.isArray(v=managedFields) then managedFields else [managedFields] } },
-    '#withManagedFieldsMixin':: d.fn(help="\"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \\\"ci-cd\\\". The set of fields is always in the version that the workflow used when modifying the object.\"\n\n**Note:** This function appends passed data to existing values", args=[d.arg(name='managedFields', type=d.T.array)]),
-    withManagedFieldsMixin(managedFields): { metadata+: { managedFields+: if std.isArray(v=managedFields) then managedFields else [managedFields] } },
     '#withName':: d.fn(help='"Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names"', args=[d.arg(name='name', type=d.T.string)]),
     withName(name): { metadata+: { name: name } },
     '#withNamespace':: d.fn(help='"Namespace defines the space within which each name must be unique. An empty namespace is equivalent to the \\"default\\" namespace, but \\"default\\" is the canonical representation. Not all objects are required to be scoped to a namespace - the value of this field for those objects will be empty.\\n\\nMust be a DNS_LABEL. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/namespaces"', args=[d.arg(name='namespace', type=d.T.string)]),
@@ -55,6 +51,26 @@
   spec: {
     '#loadBalancer':: d.obj(help='"LoadBalancer determines the load balancing policy and configuration for services issuing requests to this upstream service."'),
     loadBalancer: {
+      '#hashPolicies':: d.obj(help='"HashPolicies is a list of hash policies to use for hashing load balancing algorithms. Hash policies are evaluated individually and combined such that identical lists result in the same hash. If no hash policies are present, or none are successfully evaluated, then a random backend host will be selected."'),
+      hashPolicies: {
+        '#cookieConfig':: d.obj(help='"CookieConfig contains configuration for the \\"cookie\\" hash policy type."'),
+        cookieConfig: {
+          '#withPath':: d.fn(help='"Path is the path to set for the cookie."', args=[d.arg(name='path', type=d.T.string)]),
+          withPath(path): { cookieConfig+: { path: path } },
+          '#withSession':: d.fn(help='"Session determines whether to generate a session cookie with no expiration."', args=[d.arg(name='session', type=d.T.boolean)]),
+          withSession(session): { cookieConfig+: { session: session } },
+          '#withTtl':: d.fn(help='"TTL is the ttl for generated cookies. Cannot be specified for session cookies."', args=[d.arg(name='ttl', type=d.T.string)]),
+          withTtl(ttl): { cookieConfig+: { ttl: ttl } },
+        },
+        '#withField':: d.fn(help='"Field is the attribute type to hash on. Must be one of \\"header\\", \\"cookie\\", or \\"query_parameter\\". Cannot be specified along with sourceIP."', args=[d.arg(name='field', type=d.T.string)]),
+        withField(field): { field: field },
+        '#withFieldValue':: d.fn(help='"FieldValue is the value to hash. ie. header name, cookie name, URL query parameter name Cannot be specified along with sourceIP."', args=[d.arg(name='fieldValue', type=d.T.string)]),
+        withFieldValue(fieldValue): { fieldValue: fieldValue },
+        '#withSourceIP':: d.fn(help='"SourceIP determines whether the hash should be of the source IP rather than of a field and field value. Cannot be specified along with field or fieldValue."', args=[d.arg(name='sourceIP', type=d.T.boolean)]),
+        withSourceIP(sourceIP): { sourceIP: sourceIP },
+        '#withTerminal':: d.fn(help='"Terminal will short circuit the computation of the hash when multiple hash policies are present. If a hash is computed when a Terminal policy is evaluated, then that hash will be used and subsequent hash policies will be ignored."', args=[d.arg(name='terminal', type=d.T.boolean)]),
+        withTerminal(terminal): { terminal: terminal },
+      },
       '#leastRequestConfig':: d.obj(help='"LeastRequestConfig contains configuration for the \\"leastRequest\\" policy type."'),
       leastRequestConfig: {
         '#withChoiceCount':: d.fn(help='"ChoiceCount determines the number of random healthy hosts from which to select the one with the least requests."', args=[d.arg(name='choiceCount', type=d.T.integer)]),

@@ -22,8 +22,6 @@ permalink: /0.34/consul/v1alpha1/serviceIntentions/
   * [`fn withGeneration(generation)`](#fn-metadatawithgeneration)
   * [`fn withLabels(labels)`](#fn-metadatawithlabels)
   * [`fn withLabelsMixin(labels)`](#fn-metadatawithlabelsmixin)
-  * [`fn withManagedFields(managedFields)`](#fn-metadatawithmanagedfields)
-  * [`fn withManagedFieldsMixin(managedFields)`](#fn-metadatawithmanagedfieldsmixin)
   * [`fn withName(name)`](#fn-metadatawithname)
   * [`fn withNamespace(namespace)`](#fn-metadatawithnamespace)
   * [`fn withOwnerReferences(ownerReferences)`](#fn-metadatawithownerreferences)
@@ -37,6 +35,32 @@ permalink: /0.34/consul/v1alpha1/serviceIntentions/
   * [`obj spec.destination`](#obj-specdestination)
     * [`fn withName(name)`](#fn-specdestinationwithname)
     * [`fn withNamespace(namespace)`](#fn-specdestinationwithnamespace)
+  * [`obj spec.sources`](#obj-specsources)
+    * [`fn withAction(action)`](#fn-specsourceswithaction)
+    * [`fn withDescription(description)`](#fn-specsourceswithdescription)
+    * [`fn withName(name)`](#fn-specsourceswithname)
+    * [`fn withNamespace(namespace)`](#fn-specsourceswithnamespace)
+    * [`fn withPartition(partition)`](#fn-specsourceswithpartition)
+    * [`fn withPermissions(permissions)`](#fn-specsourceswithpermissions)
+    * [`fn withPermissionsMixin(permissions)`](#fn-specsourceswithpermissionsmixin)
+    * [`obj spec.sources.permissions`](#obj-specsourcespermissions)
+      * [`fn withAction(action)`](#fn-specsourcespermissionswithaction)
+      * [`obj spec.sources.permissions.http`](#obj-specsourcespermissionshttp)
+        * [`fn withHeader(header)`](#fn-specsourcespermissionshttpwithheader)
+        * [`fn withHeaderMixin(header)`](#fn-specsourcespermissionshttpwithheadermixin)
+        * [`fn withMethods(methods)`](#fn-specsourcespermissionshttpwithmethods)
+        * [`fn withMethodsMixin(methods)`](#fn-specsourcespermissionshttpwithmethodsmixin)
+        * [`fn withPathExact(pathExact)`](#fn-specsourcespermissionshttpwithpathexact)
+        * [`fn withPathPrefix(pathPrefix)`](#fn-specsourcespermissionshttpwithpathprefix)
+        * [`fn withPathRegex(pathRegex)`](#fn-specsourcespermissionshttpwithpathregex)
+        * [`obj spec.sources.permissions.http.header`](#obj-specsourcespermissionshttpheader)
+          * [`fn withExact(exact)`](#fn-specsourcespermissionshttpheaderwithexact)
+          * [`fn withInvert(invert)`](#fn-specsourcespermissionshttpheaderwithinvert)
+          * [`fn withName(name)`](#fn-specsourcespermissionshttpheaderwithname)
+          * [`fn withPrefix(prefix)`](#fn-specsourcespermissionshttpheaderwithprefix)
+          * [`fn withPresent(present)`](#fn-specsourcespermissionshttpheaderwithpresent)
+          * [`fn withRegex(regex)`](#fn-specsourcespermissionshttpheaderwithregex)
+          * [`fn withSuffix(suffix)`](#fn-specsourcespermissionshttpheaderwithsuffix)
 
 ## Fields
 
@@ -154,24 +178,6 @@ withLabelsMixin(labels)
 
 **Note:** This function appends passed data to existing values
 
-### fn metadata.withManagedFields
-
-```ts
-withManagedFields(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-### fn metadata.withManagedFieldsMixin
-
-```ts
-withManagedFieldsMixin(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-**Note:** This function appends passed data to existing values
-
 ### fn metadata.withName
 
 ```ts
@@ -271,3 +277,201 @@ withNamespace(namespace)
 ```
 
 "Namespace specifies the namespace the config entry will apply to. This may be set to the wildcard character (*) to match all services in all namespaces that don't otherwise have intentions defined."
+
+## obj spec.sources
+
+"Sources is the list of all intention sources and the authorization granted to those sources. The order of this list does not matter, but out of convenience Consul will always store this reverse sorted by intention precedence, as that is the order that they will be evaluated at enforcement time."
+
+### fn spec.sources.withAction
+
+```ts
+withAction(action)
+```
+
+"Action is required for an L4 intention, and should be set to one of \"allow\" or \"deny\" for the action that should be taken if this intention matches a request."
+
+### fn spec.sources.withDescription
+
+```ts
+withDescription(description)
+```
+
+"Description for the intention. This is not used by Consul, but is presented in API responses to assist tooling."
+
+### fn spec.sources.withName
+
+```ts
+withName(name)
+```
+
+"Name is the source of the intention. This is the name of a Consul service. The service doesn't need to be registered."
+
+### fn spec.sources.withNamespace
+
+```ts
+withNamespace(namespace)
+```
+
+"Namespace is the namespace for the Name parameter."
+
+### fn spec.sources.withPartition
+
+```ts
+withPartition(partition)
+```
+
+"Partition is the Admin Partition for the Name parameter."
+
+### fn spec.sources.withPermissions
+
+```ts
+withPermissions(permissions)
+```
+
+"Permissions is the list of all additional L7 attributes that extend the intention match criteria. Permission precedence is applied top to bottom. For any given request the first permission to match in the list is terminal and stops further evaluation. As with L4 intentions, traffic that fails to match any of the provided permissions in this intention will be subject to the default intention behavior is defined by the default ACL policy. This should be omitted for an L4 intention as it is mutually exclusive with the Action field."
+
+### fn spec.sources.withPermissionsMixin
+
+```ts
+withPermissionsMixin(permissions)
+```
+
+"Permissions is the list of all additional L7 attributes that extend the intention match criteria. Permission precedence is applied top to bottom. For any given request the first permission to match in the list is terminal and stops further evaluation. As with L4 intentions, traffic that fails to match any of the provided permissions in this intention will be subject to the default intention behavior is defined by the default ACL policy. This should be omitted for an L4 intention as it is mutually exclusive with the Action field."
+
+**Note:** This function appends passed data to existing values
+
+## obj spec.sources.permissions
+
+"Permissions is the list of all additional L7 attributes that extend the intention match criteria. Permission precedence is applied top to bottom. For any given request the first permission to match in the list is terminal and stops further evaluation. As with L4 intentions, traffic that fails to match any of the provided permissions in this intention will be subject to the default intention behavior is defined by the default ACL policy. This should be omitted for an L4 intention as it is mutually exclusive with the Action field."
+
+### fn spec.sources.permissions.withAction
+
+```ts
+withAction(action)
+```
+
+"Action is one of \"allow\" or \"deny\" for the action that should be taken if this permission matches a request."
+
+## obj spec.sources.permissions.http
+
+"HTTP is a set of HTTP-specific authorization criteria."
+
+### fn spec.sources.permissions.http.withHeader
+
+```ts
+withHeader(header)
+```
+
+"Header is a set of criteria that can match on HTTP request headers. If more than one is configured all must match for the overall match to apply."
+
+### fn spec.sources.permissions.http.withHeaderMixin
+
+```ts
+withHeaderMixin(header)
+```
+
+"Header is a set of criteria that can match on HTTP request headers. If more than one is configured all must match for the overall match to apply."
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.sources.permissions.http.withMethods
+
+```ts
+withMethods(methods)
+```
+
+"Methods is a list of HTTP methods for which this match applies. If unspecified all HTTP methods are matched. If provided the names must be a valid method."
+
+### fn spec.sources.permissions.http.withMethodsMixin
+
+```ts
+withMethodsMixin(methods)
+```
+
+"Methods is a list of HTTP methods for which this match applies. If unspecified all HTTP methods are matched. If provided the names must be a valid method."
+
+**Note:** This function appends passed data to existing values
+
+### fn spec.sources.permissions.http.withPathExact
+
+```ts
+withPathExact(pathExact)
+```
+
+"PathExact is the exact path to match on the HTTP request path."
+
+### fn spec.sources.permissions.http.withPathPrefix
+
+```ts
+withPathPrefix(pathPrefix)
+```
+
+"PathPrefix is the path prefix to match on the HTTP request path."
+
+### fn spec.sources.permissions.http.withPathRegex
+
+```ts
+withPathRegex(pathRegex)
+```
+
+"PathRegex is the regular expression to match on the HTTP request path."
+
+## obj spec.sources.permissions.http.header
+
+"Header is a set of criteria that can match on HTTP request headers. If more than one is configured all must match for the overall match to apply."
+
+### fn spec.sources.permissions.http.header.withExact
+
+```ts
+withExact(exact)
+```
+
+"Exact matches if the header with the given name is this value."
+
+### fn spec.sources.permissions.http.header.withInvert
+
+```ts
+withInvert(invert)
+```
+
+"Invert inverts the logic of the match."
+
+### fn spec.sources.permissions.http.header.withName
+
+```ts
+withName(name)
+```
+
+"Name is the name of the header to match."
+
+### fn spec.sources.permissions.http.header.withPrefix
+
+```ts
+withPrefix(prefix)
+```
+
+"Prefix matches if the header with the given name has this prefix."
+
+### fn spec.sources.permissions.http.header.withPresent
+
+```ts
+withPresent(present)
+```
+
+"Present matches if the header with the given name is present with any value."
+
+### fn spec.sources.permissions.http.header.withRegex
+
+```ts
+withRegex(regex)
+```
+
+"Regex matches if the header with the given name matches this pattern."
+
+### fn spec.sources.permissions.http.header.withSuffix
+
+```ts
+withSuffix(suffix)
+```
+
+"Suffix matches if the header with the given name has this suffix."

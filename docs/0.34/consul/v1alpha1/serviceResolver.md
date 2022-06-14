@@ -22,8 +22,6 @@ permalink: /0.34/consul/v1alpha1/serviceResolver/
   * [`fn withGeneration(generation)`](#fn-metadatawithgeneration)
   * [`fn withLabels(labels)`](#fn-metadatawithlabels)
   * [`fn withLabelsMixin(labels)`](#fn-metadatawithlabelsmixin)
-  * [`fn withManagedFields(managedFields)`](#fn-metadatawithmanagedfields)
-  * [`fn withManagedFieldsMixin(managedFields)`](#fn-metadatawithmanagedfieldsmixin)
   * [`fn withName(name)`](#fn-metadatawithname)
   * [`fn withNamespace(namespace)`](#fn-metadatawithnamespace)
   * [`fn withOwnerReferences(ownerReferences)`](#fn-metadatawithownerreferences)
@@ -42,6 +40,15 @@ permalink: /0.34/consul/v1alpha1/serviceResolver/
     * [`fn withHashPolicies(hashPolicies)`](#fn-specloadbalancerwithhashpolicies)
     * [`fn withHashPoliciesMixin(hashPolicies)`](#fn-specloadbalancerwithhashpoliciesmixin)
     * [`fn withPolicy(policy)`](#fn-specloadbalancerwithpolicy)
+    * [`obj spec.loadBalancer.hashPolicies`](#obj-specloadbalancerhashpolicies)
+      * [`fn withField(field)`](#fn-specloadbalancerhashpolicieswithfield)
+      * [`fn withFieldValue(fieldValue)`](#fn-specloadbalancerhashpolicieswithfieldvalue)
+      * [`fn withSourceIP(sourceIP)`](#fn-specloadbalancerhashpolicieswithsourceip)
+      * [`fn withTerminal(terminal)`](#fn-specloadbalancerhashpolicieswithterminal)
+      * [`obj spec.loadBalancer.hashPolicies.cookieConfig`](#obj-specloadbalancerhashpoliciescookieconfig)
+        * [`fn withPath(path)`](#fn-specloadbalancerhashpoliciescookieconfigwithpath)
+        * [`fn withSession(session)`](#fn-specloadbalancerhashpoliciescookieconfigwithsession)
+        * [`fn withTtl(ttl)`](#fn-specloadbalancerhashpoliciescookieconfigwithttl)
     * [`obj spec.loadBalancer.leastRequestConfig`](#obj-specloadbalancerleastrequestconfig)
       * [`fn withChoiceCount(choiceCount)`](#fn-specloadbalancerleastrequestconfigwithchoicecount)
     * [`obj spec.loadBalancer.ringHashConfig`](#obj-specloadbalancerringhashconfig)
@@ -166,24 +173,6 @@ withLabelsMixin(labels)
 ```
 
 "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels"
-
-**Note:** This function appends passed data to existing values
-
-### fn metadata.withManagedFields
-
-```ts
-withManagedFields(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-### fn metadata.withManagedFieldsMixin
-
-```ts
-withManagedFieldsMixin(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
 
 **Note:** This function appends passed data to existing values
 
@@ -330,6 +319,70 @@ withPolicy(policy)
 ```
 
 "Policy is the load balancing policy used to select a host."
+
+## obj spec.loadBalancer.hashPolicies
+
+"HashPolicies is a list of hash policies to use for hashing load balancing algorithms. Hash policies are evaluated individually and combined such that identical lists result in the same hash. If no hash policies are present, or none are successfully evaluated, then a random backend host will be selected."
+
+### fn spec.loadBalancer.hashPolicies.withField
+
+```ts
+withField(field)
+```
+
+"Field is the attribute type to hash on. Must be one of \"header\", \"cookie\", or \"query_parameter\". Cannot be specified along with sourceIP."
+
+### fn spec.loadBalancer.hashPolicies.withFieldValue
+
+```ts
+withFieldValue(fieldValue)
+```
+
+"FieldValue is the value to hash. ie. header name, cookie name, URL query parameter name Cannot be specified along with sourceIP."
+
+### fn spec.loadBalancer.hashPolicies.withSourceIP
+
+```ts
+withSourceIP(sourceIP)
+```
+
+"SourceIP determines whether the hash should be of the source IP rather than of a field and field value. Cannot be specified along with field or fieldValue."
+
+### fn spec.loadBalancer.hashPolicies.withTerminal
+
+```ts
+withTerminal(terminal)
+```
+
+"Terminal will short circuit the computation of the hash when multiple hash policies are present. If a hash is computed when a Terminal policy is evaluated, then that hash will be used and subsequent hash policies will be ignored."
+
+## obj spec.loadBalancer.hashPolicies.cookieConfig
+
+"CookieConfig contains configuration for the \"cookie\" hash policy type."
+
+### fn spec.loadBalancer.hashPolicies.cookieConfig.withPath
+
+```ts
+withPath(path)
+```
+
+"Path is the path to set for the cookie."
+
+### fn spec.loadBalancer.hashPolicies.cookieConfig.withSession
+
+```ts
+withSession(session)
+```
+
+"Session determines whether to generate a session cookie with no expiration."
+
+### fn spec.loadBalancer.hashPolicies.cookieConfig.withTtl
+
+```ts
+withTtl(ttl)
+```
+
+"TTL is the ttl for generated cookies. Cannot be specified for session cookies."
 
 ## obj spec.loadBalancer.leastRequestConfig
 

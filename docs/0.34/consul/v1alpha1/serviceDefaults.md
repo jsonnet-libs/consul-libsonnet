@@ -22,8 +22,6 @@ permalink: /0.34/consul/v1alpha1/serviceDefaults/
   * [`fn withGeneration(generation)`](#fn-metadatawithgeneration)
   * [`fn withLabels(labels)`](#fn-metadatawithlabels)
   * [`fn withLabelsMixin(labels)`](#fn-metadatawithlabelsmixin)
-  * [`fn withManagedFields(managedFields)`](#fn-metadatawithmanagedfields)
-  * [`fn withManagedFieldsMixin(managedFields)`](#fn-metadatawithmanagedfieldsmixin)
   * [`fn withName(name)`](#fn-metadatawithname)
   * [`fn withNamespace(namespace)`](#fn-metadatawithnamespace)
   * [`fn withOwnerReferences(ownerReferences)`](#fn-metadatawithownerreferences)
@@ -39,6 +37,11 @@ permalink: /0.34/consul/v1alpha1/serviceDefaults/
     * [`fn withChecks(checks)`](#fn-specexposewithchecks)
     * [`fn withPaths(paths)`](#fn-specexposewithpaths)
     * [`fn withPathsMixin(paths)`](#fn-specexposewithpathsmixin)
+    * [`obj spec.expose.paths`](#obj-specexposepaths)
+      * [`fn withListenerPort(listenerPort)`](#fn-specexposepathswithlistenerport)
+      * [`fn withLocalPathPort(localPathPort)`](#fn-specexposepathswithlocalpathport)
+      * [`fn withPath(path)`](#fn-specexposepathswithpath)
+      * [`fn withProtocol(protocol)`](#fn-specexposepathswithprotocol)
   * [`obj spec.meshGateway`](#obj-specmeshgateway)
     * [`fn withMode(mode)`](#fn-specmeshgatewaywithmode)
   * [`obj spec.transparentProxy`](#obj-spectransparentproxy)
@@ -64,6 +67,23 @@ permalink: /0.34/consul/v1alpha1/serviceDefaults/
       * [`obj spec.upstreamConfig.defaults.passiveHealthCheck`](#obj-specupstreamconfigdefaultspassivehealthcheck)
         * [`fn withInterval(interval)`](#fn-specupstreamconfigdefaultspassivehealthcheckwithinterval)
         * [`fn withMaxFailures(maxFailures)`](#fn-specupstreamconfigdefaultspassivehealthcheckwithmaxfailures)
+    * [`obj spec.upstreamConfig.overrides`](#obj-specupstreamconfigoverrides)
+      * [`fn withConnectTimeoutMs(connectTimeoutMs)`](#fn-specupstreamconfigoverrideswithconnecttimeoutms)
+      * [`fn withEnvoyClusterJSON(envoyClusterJSON)`](#fn-specupstreamconfigoverrideswithenvoyclusterjson)
+      * [`fn withEnvoyListenerJSON(envoyListenerJSON)`](#fn-specupstreamconfigoverrideswithenvoylistenerjson)
+      * [`fn withName(name)`](#fn-specupstreamconfigoverrideswithname)
+      * [`fn withNamespace(namespace)`](#fn-specupstreamconfigoverrideswithnamespace)
+      * [`fn withPartition(partition)`](#fn-specupstreamconfigoverrideswithpartition)
+      * [`fn withProtocol(protocol)`](#fn-specupstreamconfigoverrideswithprotocol)
+      * [`obj spec.upstreamConfig.overrides.limits`](#obj-specupstreamconfigoverrideslimits)
+        * [`fn withMaxConcurrentRequests(maxConcurrentRequests)`](#fn-specupstreamconfigoverrideslimitswithmaxconcurrentrequests)
+        * [`fn withMaxConnections(maxConnections)`](#fn-specupstreamconfigoverrideslimitswithmaxconnections)
+        * [`fn withMaxPendingRequests(maxPendingRequests)`](#fn-specupstreamconfigoverrideslimitswithmaxpendingrequests)
+      * [`obj spec.upstreamConfig.overrides.meshGateway`](#obj-specupstreamconfigoverridesmeshgateway)
+        * [`fn withMode(mode)`](#fn-specupstreamconfigoverridesmeshgatewaywithmode)
+      * [`obj spec.upstreamConfig.overrides.passiveHealthCheck`](#obj-specupstreamconfigoverridespassivehealthcheck)
+        * [`fn withInterval(interval)`](#fn-specupstreamconfigoverridespassivehealthcheckwithinterval)
+        * [`fn withMaxFailures(maxFailures)`](#fn-specupstreamconfigoverridespassivehealthcheckwithmaxfailures)
 
 ## Fields
 
@@ -178,24 +198,6 @@ withLabelsMixin(labels)
 ```
 
 "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels"
-
-**Note:** This function appends passed data to existing values
-
-### fn metadata.withManagedFields
-
-```ts
-withManagedFields(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
-
-### fn metadata.withManagedFieldsMixin
-
-```ts
-withManagedFieldsMixin(managedFields)
-```
-
-"ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like \"ci-cd\". The set of fields is always in the version that the workflow used when modifying the object."
 
 **Note:** This function appends passed data to existing values
 
@@ -314,6 +316,42 @@ withPathsMixin(paths)
 "Paths is the list of paths exposed through the proxy."
 
 **Note:** This function appends passed data to existing values
+
+## obj spec.expose.paths
+
+"Paths is the list of paths exposed through the proxy."
+
+### fn spec.expose.paths.withListenerPort
+
+```ts
+withListenerPort(listenerPort)
+```
+
+"ListenerPort defines the port of the proxy's listener for exposed paths."
+
+### fn spec.expose.paths.withLocalPathPort
+
+```ts
+withLocalPathPort(localPathPort)
+```
+
+"LocalPathPort is the port that the service is listening on for the given path."
+
+### fn spec.expose.paths.withPath
+
+```ts
+withPath(path)
+```
+
+"Path is the path to expose through the proxy, ie. \"/metrics\"."
+
+### fn spec.expose.paths.withProtocol
+
+```ts
+withProtocol(protocol)
+```
+
+"Protocol describes the upstream's service protocol. Valid values are \"http\" and \"http2\", defaults to \"http\"."
 
 ## obj spec.meshGateway
 
@@ -482,6 +520,126 @@ withInterval(interval)
 "Interval between health check analysis sweeps. Each sweep may remove hosts or return hosts to the pool."
 
 ### fn spec.upstreamConfig.defaults.passiveHealthCheck.withMaxFailures
+
+```ts
+withMaxFailures(maxFailures)
+```
+
+"MaxFailures is the count of consecutive failures that results in a host being removed from the pool."
+
+## obj spec.upstreamConfig.overrides
+
+"Overrides is a slice of per-service configuration. The name field is required."
+
+### fn spec.upstreamConfig.overrides.withConnectTimeoutMs
+
+```ts
+withConnectTimeoutMs(connectTimeoutMs)
+```
+
+"ConnectTimeoutMs is the number of milliseconds to timeout making a new connection to this upstream. Defaults to 5000 (5 seconds) if not set."
+
+### fn spec.upstreamConfig.overrides.withEnvoyClusterJSON
+
+```ts
+withEnvoyClusterJSON(envoyClusterJSON)
+```
+
+"EnvoyClusterJSON is a complete override (\"escape hatch\") for the upstream's cluster. The Connect client TLS certificate and context will be injected overriding any TLS settings present. Note: This escape hatch is NOT compatible with the discovery chain and will be ignored if a discovery chain is active."
+
+### fn spec.upstreamConfig.overrides.withEnvoyListenerJSON
+
+```ts
+withEnvoyListenerJSON(envoyListenerJSON)
+```
+
+"EnvoyListenerJSON is a complete override (\"escape hatch\") for the upstream's listener. Note: This escape hatch is NOT compatible with the discovery chain and will be ignored if a discovery chain is active."
+
+### fn spec.upstreamConfig.overrides.withName
+
+```ts
+withName(name)
+```
+
+"Name is only accepted within a service-defaults config entry."
+
+### fn spec.upstreamConfig.overrides.withNamespace
+
+```ts
+withNamespace(namespace)
+```
+
+"Namespace is only accepted within a service-defaults config entry."
+
+### fn spec.upstreamConfig.overrides.withPartition
+
+```ts
+withPartition(partition)
+```
+
+"Partition is only accepted within a service-defaults config entry."
+
+### fn spec.upstreamConfig.overrides.withProtocol
+
+```ts
+withProtocol(protocol)
+```
+
+"Protocol describes the upstream's service protocol. Valid values are \"tcp\", \"http\" and \"grpc\". Anything else is treated as tcp. This enables protocol aware features like per-request metrics and connection pooling, tracing, routing etc."
+
+## obj spec.upstreamConfig.overrides.limits
+
+"Limits are the set of limits that are applied to the proxy for a specific upstream of a service instance."
+
+### fn spec.upstreamConfig.overrides.limits.withMaxConcurrentRequests
+
+```ts
+withMaxConcurrentRequests(maxConcurrentRequests)
+```
+
+"MaxConcurrentRequests is the maximum number of in-flight requests that will be allowed to the upstream cluster at a point in time. This is mostly applicable to HTTP/2 clusters since all HTTP/1.1 requests are limited by MaxConnections."
+
+### fn spec.upstreamConfig.overrides.limits.withMaxConnections
+
+```ts
+withMaxConnections(maxConnections)
+```
+
+"MaxConnections is the maximum number of connections the local proxy can make to the upstream service."
+
+### fn spec.upstreamConfig.overrides.limits.withMaxPendingRequests
+
+```ts
+withMaxPendingRequests(maxPendingRequests)
+```
+
+"MaxPendingRequests is the maximum number of requests that will be queued waiting for an available connection. This is mostly applicable to HTTP/1.1 clusters since all HTTP/2 requests are streamed over a single connection."
+
+## obj spec.upstreamConfig.overrides.meshGateway
+
+"MeshGatewayConfig controls how Mesh Gateways are configured and used."
+
+### fn spec.upstreamConfig.overrides.meshGateway.withMode
+
+```ts
+withMode(mode)
+```
+
+"Mode is the mode that should be used for the upstream connection. One of none, local, or remote."
+
+## obj spec.upstreamConfig.overrides.passiveHealthCheck
+
+"PassiveHealthCheck configuration determines how upstream proxy instances will be monitored for removal from the load balancing pool."
+
+### fn spec.upstreamConfig.overrides.passiveHealthCheck.withInterval
+
+```ts
+withInterval(interval)
+```
+
+"Interval between health check analysis sweeps. Each sweep may remove hosts or return hosts to the pool."
+
+### fn spec.upstreamConfig.overrides.passiveHealthCheck.withMaxFailures
 
 ```ts
 withMaxFailures(maxFailures)
